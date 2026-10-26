@@ -1,0 +1,190 @@
+{
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "driver": "617.14",
+    "memory_mib": "8188",
+    "max_sm_mhz": "3105",
+    "max_mem_mhz": "8001",
+    "max_power_w": "140.00",
+    "theoretical_gbs": 256.032,
+    "theoretical_gbs_note": "mem_clock_mhz * 2 * 128-bit / 8, from nvidia-smi max memory clock"
+  },
+  "torch": "2.11.0+cu128",
+  "triton": "3.6.0",
+  "allow_tf32": false,
+  "allow_fp16_reduced_precision_reduction": true,
+  "clocks_under_load": {
+    "power_w": 98.38,
+    "sm_mhz": 2550.0,
+    "mem_mhz": 8001.0,
+    "util_pct": 100.0,
+    "samples": 20
+  },
+  "roofline": [
+    {
+      "dtype": "float16",
+      "copy_gbs": 174.67533359479415,
+      "triad_gbs": 175.28071281015258,
+      "copy_us": 1536.7679595947266,
+      "triad_us": 2297.190475463867,
+      "cublas_tflops": 36.55465399399458,
+      "cublas_mm_us": 3759.8209381103516,
+      "cublas_mm_n": 4096
+    }
+  ],
+  "rows": [
+    {
+      "name": "rms_norm 2048x4096 torch.float16",
+      "us": 116.42879645029704,
+      "eager_us": 58.26559861501058,
+      "speedup_vs_eager": 0.5004397570998161,
+      "gbs": 288.2673790613969,
+      "pct_copy_roof": 165.03038702081986,
+      "bytes": 33562624,
+      "max_abs": 0.00390625
+    },
+    {
+      "name": "add_rms_norm 2048x4096 torch.float16",
+      "us": 344.9173291524251,
+      "eager_us": 340.20694096883136,
+      "speedup_vs_eager": 0.986343428452352,
+      "gbs": 194.58881977582456,
+      "pct_copy_roof": 111.40028518693146,
+      "bytes": 67117056
+    },
+    {
+      "name": "rms_norm 1x4096 torch.float16",
+      "us": 133.95008087158203,
+      "eager_us": 67.358717918396,
+      "speedup_vs_eager": 0.5028643318474202,
+      "gbs": 0.18347133379905173,
+      "pct_copy_roof": 0.10503562811258872,
+      "bytes": 24576,
+      "max_abs": 0.0
+    },
+    {
+      "name": "add_rms_norm 1x4096 torch.float16",
+      "us": 151.85919761657715,
+      "eager_us": 122.92991638183594,
+      "speedup_vs_eager": 0.8094993145704383,
+      "gbs": 0.26972353761158524,
+      "pct_copy_roof": 0.1544142106734318,
+      "bytes": 40960
+    },
+    {
+      "name": "swiglu 2048x14336 torch.float16",
+      "us": 1010.4149500528972,
+      "eager_us": 1722.3978678385417,
+      "speedup_vs_eager": 1.7046440848369977,
+      "gbs": 174.34497380583852,
+      "pct_copy_roof": 99.81087210073862,
+      "bytes": 176160768
+    },
+    {
+      "name": "rope (1, 2048, 32, 128) torch.float16",
+      "us": 185.85279782613117,
+      "eager_us": 531.9594701131185,
+      "speedup_vs_eager": 2.8622623728848935,
+      "gbs": 186.18502602458412,
+      "pct_copy_roof": 106.58919161218823,
+      "bytes": 34603008,
+      "max_abs": 0.0
+    },
+    {
+      "name": "linear M=1 N=4096 K=4096 dot torch.float16",
+      "us": 142.4998378753662,
+      "eager_us": 165.8016014099121,
+      "mv_us": 156.13632202148438,
+      "speedup_vs_eager": 1.163521333651805,
+      "speedup_vs_mv": 1.0956947344602943,
+      "gbs": 235.58494171313967,
+      "pct_copy_roof": 134.87018279274713,
+      "useful_tflops": 0.23546996614373356,
+      "issued_tflops": 3.767519458299737,
+      "issued_pct_cublas_peak": 10.30653842030262,
+      "max_abs_vs_fp32": 3.0517578125e-05,
+      "max_abs_vs_cublas": 3.0517578125e-05,
+      "bytes": 33570816
+    },
+    {
+      "name": "linear M=1 N=4096 K=4096 simt torch.float16",
+      "us": 143.9948844909668,
+      "eager_us": 165.8016014099121,
+      "mv_us": 156.13632202148438,
+      "speedup_vs_eager": 1.151440914002145,
+      "speedup_vs_mv": 1.084318533769019,
+      "gbs": 233.138948780545,
+      "pct_copy_roof": 133.4698746426171,
+      "useful_tflops": 0.23302516696073997,
+      "issued_tflops": 0.23302516696073997,
+      "issued_pct_cublas_peak": 0.6374705858220482,
+      "max_abs_vs_fp32": 3.814697265625e-06,
+      "max_abs_vs_cublas": 3.814697265625e-06,
+      "bytes": 33570816
+    },
+    {
+      "name": "linear M=8 N=4096 K=4096 dot torch.float16",
+      "us": 131.31775856018066,
+      "eager_us": 85.1148796081543,
+      "mv_us": null,
+      "speedup_vs_eager": 0.6481597046841735,
+      "speedup_vs_mv": null,
+      "gbs": 256.5190296372787,
+      "pct_copy_roof": 146.85475296262652,
+      "useful_tflops": 2.0441672089383145,
+      "issued_tflops": 4.088334417876629,
+      "issued_pct_cublas_peak": 11.184169377032772,
+      "max_abs_vs_fp32": 3.0517578125e-05,
+      "max_abs_vs_cublas": 0.0,
+      "bytes": 33685504
+    },
+    {
+      "name": "linear M=8 N=4096 K=4096 simt torch.float16",
+      "us": 245.71903228759766,
+      "eager_us": 85.1148796081543,
+      "mv_us": null,
+      "speedup_vs_eager": 0.34639107445504275,
+      "speedup_vs_mv": null,
+      "gbs": 137.08951922199245,
+      "pct_copy_roof": 78.48247168086596,
+      "useful_tflops": 1.0924487757456829,
+      "issued_tflops": 1.0924487757456829,
+      "issued_pct_cublas_peak": 2.9885354021546946,
+      "max_abs_vs_fp32": 3.0517578125e-05,
+      "max_abs_vs_cublas": 3.0517578125e-05,
+      "bytes": 33685504
+    },
+    {
+      "name": "linear M=32 N=4096 K=4096 dot torch.float16",
+      "us": 200.2943992614746,
+      "eager_us": 81.36320114135742,
+      "mv_us": null,
+      "speedup_vs_eager": 0.40621805423097085,
+      "speedup_vs_mv": null,
+      "gbs": 170.1431499116053,
+      "pct_copy_roof": 97.40536709453066,
+      "useful_tflops": 5.360818015676426,
+      "issued_tflops": 5.360818015676426,
+      "issued_pct_cublas_peak": 14.665213399522624,
+      "max_abs_vs_fp32": 3.0517578125e-05,
+      "max_abs_vs_cublas": 0.0,
+      "bytes": 34078720
+    },
+    {
+      "name": "post_attn_mlp M=1 dot torch.float16",
+      "us": 1924.505615234375,
+      "eager_us": 1719.159444173177,
+      "speedup_vs_eager": 0.8932992611527455,
+      "max_abs_vs_eager": 0.001953125,
+      "cuda_graph_us": 1694.1397349039712
+    },
+    {
+      "name": "post_attn_mlp M=1 simt torch.float16",
+      "us": 1888.2901509602866,
+      "eager_us": 1740.5269622802734,
+      "speedup_vs_eager": 0.9217476251703858,
+      "max_abs_vs_eager": 0.001953125,
+      "cuda_graph_us": 1806.3018798828125
+    }
+  ]
+}

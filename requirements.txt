@@ -1,0 +1,5 @@
+--extra-index-url https://download.pytorch.org/whl/cu128
+torch==2.11.0+cu128
+numpy>=2
+triton-windows==3.6.0.post26; platform_system == "Windows"
+pytest>=8
